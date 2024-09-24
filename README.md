@@ -4,7 +4,7 @@ An open-source, highly scalable, hands free SaaS tool for upgrading multiple AKS
 ![Architecture view for upgrade_kube.png](./upgrade_kube.png)
 
 ## AKSlayer0.61b Quickstart Guide :
-1. `git clone 'this repo'`
+1. `git clone https://github.com/multipathmaster/akslayer.git`
 2. `docker build -t akslayer0.61b .`
 3. `docker run -it -p 5000:5000 akslayer0.61b`
 4. Follow the link in the terminal to go to your azure page and register the device. - This should be your admin account!!
