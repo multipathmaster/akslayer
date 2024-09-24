@@ -1,0 +1,40 @@
+﻿cluster_name,env,version,resource_group,location,subscription
+CLUSTER1,Production,1.24.6,resource_group_alpha,North Europe,SUBSCRIPTION-SUB001
+CLUSTER2,Production,1.24.6,resource_group_charlie,North Europe,SUBSCRIPTION-SUB003
+CLUSTER3,Production,1.24.6,resource_group_bravo,North Europe,SUBSCRIPTION-SUB002
+CLUSTER4,Production,1.24.6,resource_group_bravo,North Europe,SUBSCRIPTION-SUB002
+CLUSTER5,Production,1.24.6,resource_group_bravo,North Europe,SUBSCRIPTION-SUB002
+CLUSTER6,Production,1.24.6,resource_group_alpha,North Europe,SUBSCRIPTION-SUB001
+CLUSTER7,Production,1.24.6,resource_group_alpha,North Europe,SUBSCRIPTION-SUB001
+CLUSTER8,Production,1.24.6,resource_group_alpha,Switzerland North,SUBSCRIPTION-SUB001
+CLUSTER9,Production,1.25.6,resource_group_alpha,Switzerland North,SUBSCRIPTION-SUB001
+CLUSTER10,Production,1.25.6,resource_group_bravo,Switzerland North,SUBSCRIPTION-SUB002
+CLUSTER11,Production,1.24.6,resource_group_bravo,Switzerland North,SUBSCRIPTION-SUB002
+CLUSTER12,Production,1.24.6,resource_group_bravo,Switzerland North,SUBSCRIPTION-SUB002
+CLUSTER13,Production,1.24.6,resource_group_charlie,Switzerland North,SUBSCRIPTION-SUB003
+CLUSTER14,Production,1.24.6,resource_group_charlie,Switzerland North,SUBSCRIPTION-SUB003
+CLUSTER15,Production,1.24.6,resource_group_bravo,Switzerland North,SUBSCRIPTION-SUB002
+CLUSTER16,Production,1.25.6,resource_group_bravo,Switzerland North,SUBSCRIPTION-SUB002
+CLUSTER17,Production,1.25.6,resource_group_alpha,Switzerland West,SUBSCRIPTION-SUB001
+CLUSTER18,Production,1.24.6,resource_group_charlie,Switzerland West,SUBSCRIPTION-SUB003
+CLUSTER19,Production,1.24.6,resource_group_charlie,Switzerland West,SUBSCRIPTION-SUB003
+CLUSTER20,Production,1.24.6,resource_group_charlie,West Europe,SUBSCRIPTION-SUB003
+CLUSTER21,Production,1.24.6,resource_group_alpha,West Europe,SUBSCRIPTION-SUB001
+CLUSTER22,Production,1.24.6,resource_group_alpha,West Europe,SUBSCRIPTION-SUB001
+CLUSTER23,Production,1.24.6,resource_group_alpha,West Europe,SUBSCRIPTION-SUB001
+CLUSTER24,Production,1.24.6,resource_group_charlie,West Europe,SUBSCRIPTION-SUB003
+CLUSTER25,Production,1.24.6,resource_group_bravo,West Europe,SUBSCRIPTION-SUB002
+CLUSTER26,Production,1.24.6,resource_group_bravo,West Europe,SUBSCRIPTION-SUB002
+CLUSTER27,Production,1.24.6,resource_group_alpha,West Europe,SUBSCRIPTION-SUB001
+CLUSTER28,Production,1.27.3,resource_group_charlie,West Europe,SUBSCRIPTION-SUB003
+CLUSTER29,Production,1.25.6,resource_group_charlie,West Europe,SUBSCRIPTION-SUB003
+CLUSTER30,Production,1.24.6,resource_group_alpha,West Europe,SUBSCRIPTION-SUB001
+CLUSTER31,Production,1.24.6,resource_group_charlie,West Europe,SUBSCRIPTION-SUB003
+CLUSTER32,Production,1.24.6,resource_group_alpha,West Europe,SUBSCRIPTION-SUB001
+CLUSTER33,"Production 
+Do not upgrade.",1.25.6,resource_group_bravo,West Europe,SUBSCRIPTION-SUB002
+CLUSTER34,Production,1.24.6,resource_group_bravo,West Europe,SUBSCRIPTION-SUB002
+CLUSTER35,Production,1.24.6,resource_group_bravo,West Europe,SUBSCRIPTION-SUB002
+CLUSTER36,Production,1.24.6,resource_group_bravo,West Europe,SUBSCRIPTION-SUB002
+CLUSTER37,Production,1.24.6,resource_group_charlie,West Europe,SUBSCRIPTION-SUB003
+CLUSTER38,Production,1.25.6,resource_group_charlie,West Europe,SUBSCRIPTION-SUB003
