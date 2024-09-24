@@ -68,11 +68,6 @@ def progress():
 @app.route('/log')
 def progress_log():
     def generate():
-        #BELOW IS HOW TO READ THE LOG FILE FROM THE PROGRAM AND NOT JUST RAW WEB OUTPUT THAT WE DONT CARE ABOUT
-        #with open('log/upgrade_kube.log') as f:
-            #while True:
-                #yield f.read()
-                #time.sleep(0.2)
         for line in Pygtail('log/upgrade_kube.log', every_n=1):
             yield "data:" + str(line) + "\n\n"
             time.sleep(0.05)
