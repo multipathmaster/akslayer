@@ -1,0 +1,214 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>AKSlayer 0.61b</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+<style>
+body {
+  background-color: black;
+}
+p {
+  margin: 0
+}
+#all {
+  box-sizing: border-box;
+  /*background-color: teal;*/
+  background-color: lightblue;
+  border-radius: 20px;
+  height: 100%;
+}
+#navigation {
+  display: inline-block;
+  margin-left: 14px;
+  padding: 5px;
+  background: white;
+  width: 83%;
+  position: relative;
+  border-radius: 20px;
+  height: 8%;
+  margin-top: 2px;
+  margin-bottom: 10px;
+}
+#left {
+  float: left;
+  margin-right: 40px;
+  margin-left: 14px;
+  padding: 5px;
+  background: white;
+  width: 20%;
+  height: 70%;
+  border-radius: 20px;
+}
+#center {
+  display: inline-block;
+  padding: 5px;
+  background: white;
+  width: 60%;
+  position: relative;
+  border-radius: 20px;
+  height: 90%;
+}
+</style>
+</head>
+<body>
+
+
+<div id="all">
+  <p><font color="white"></font></p>
+
+  <div id="navigation">
+    <p>Messages:</p>
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    {{ message }}
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+  </div>
+
+  <div id="left">
+    <div class="has-text-centered">
+        <p>MEM Usage: <progress id="memory-bar" value="0" max="100"></progress> <span id="memory">0</span>%</p>
+        <p>CPU Usage: <progress id="cpu-bar" value="0" max="100"></progress> <span id="cpu">0</span>%</p>
+        <p id="main-status"></p>
+    </div>
+    <br>
+    <p></p>
+    <form action="{{ url_for('stop_process') }}" method="post" class="has-text-centered">
+        {{ form.csrf_token() }}
+        <h1></h1>
+        <p><label for="submit"></label></p>
+        <button class="button is-danger is-large">
+            <span class="icon">
+                <i class="fas fa-stop-circle"></i>
+            </span>
+            <span>Stop</span>
+        </button>
+    </form>
+
+    <form method="post" action="/upload" enctype="multipart/form-data" class="has-text-centered">
+        <h1>Upload CSV File</h1>
+        <div class="field is-centered">
+            <div class="control" style="display: flex; justify-content: center;">
+                <div class="file is-primary">
+                    <label class="file-label">
+                        <input class="file-input" type="file" id="csv_file" name="csv_file">
+                        <span class="file-cta">
+                            <span class="file-icon">
+                                <i class="fas fa-upload"></i>
+                            </span>
+                            <span class="file-label">
+                                Choose a CSV file...
+                            </span>
+                        </span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <p><button type="submit" class="button is-link is-medium">Upload</button></p>
+        <script>
+            document.getElementById('csv_file').addEventListener('change', function() {
+                if (this.files && this.files.length > 0) {
+                    var fileName = this.files[0].name;
+                    document.getElementById('file-name-display').textContent = "Selected file: " + fileName;
+                }
+            });
+        </script>
+        <p id="file-name-display"></p>
+    </form>
+
+    <form action="" method="post" class="has-text-centered">
+        {{ form.csrf_token() }}
+        <h1>AKSlayer Upgrader</h1>
+        <p><label for="file_json"></label></p>
+        <p><input id="file_json" name="file_json" required type="text" placeholder="file_name.json"></p>
+        <p><label for="environment"></label></p>
+        <p><input id="environment" name="environment" required type="text" placeholder="dev/qa/uat/stage/prod"></p>
+        <p><label for="webhook_url"></label></p>
+        <p><input id="webhook_url" name="webhook_url" required type="text" placeholder="Slack or G-Chat webhook API URL"></p>
+        <p><label for="kube_version_low"></label></p>
+        <p><input id="kube_version_low" name="kube_version_low" required type="text" placeholder="Starting Version - 1.27.3"></p>
+        <p><label for="kube_version_mid"></label></p>
+        <p><input id="kube_version_mid" name="kube_version_mid" required type="text" placeholder="Next Hop - 1.28.6"></p>
+        <p><label for="kube_version_hi"></label></p>
+        <p><input id="kube_version_hi" name="kube_version_hi" required type="text" placeholder="Next Hop - 1.29.3"></p>
+        <p><label for="kube_version_final"></label></p>
+        <p><input id="kube_version_final" name="kube_version_final" required type="text" placeholder="Desired Version - 1.30.1"></p>
+        <br>
+        <p><label for="submit"></label></p>
+        <p><input id="submit" name="submit" button type="submit" value="Submit" class="button is-link is-medium"></p>
+    </form>
+
+  </div>
+
+
+  <div id="center">
+    <p></p>
+    <section class="section">
+        <div class="container">
+            <div class="">	
+                <div class="column is-muted notification is-four-fifths">
+                    <h2 class="title">AKSlayer 0.61b</h2>
+                    <h2 class="subtitle">Upgrade Progress</h2>
+                    <div id="progress"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="">	
+                <div class="column is-dark notification is-four-fifths">
+                    <div class="is-size-7 has-text-warning" id="display">
+                        <ul id="display_list">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
+        
+        <script type="text/javascript">
+            var source = new EventSource("/log");
+            source.onmessage = function(event) {
+                // $('#display').prepend(event.data);
+                $('#display_list').prepend('<li>'+event.data+'</li>');
+                if(event.data == 100){
+                    source.close()
+                }
+            }
+        
+            var source_progress = new EventSource("/progress");
+            source_progress.onmessage = function(event) {
+                $('#progress').text(event.data+'%');
+                $('#progress').value(event.data);
+                if(event.data == 100){
+                    source_progress.close()
+                }
+            }
+
+            function updateStats() {
+                $.getJSON('/system_stats', function(data) {
+                    $('#memory').text(data.memory);
+                    $('#memory-bar').val(data.memory);
+                    $('#cpu').text(data.cpu);
+                    $('#cpu-bar').val(data.cpu);
+                    // Check if main.py is running and update the status
+                    if (data.main_running) {
+                        $('#main-status').text('Upgrader is currently running.');
+                    } else {
+                        $('#main-status').text('Upgrader is not running.');
+                    }
+                });
+            }
+            // Update stats every 4 seconds
+            setInterval(updateStats, 4000);
+
+        </script>
+  </div>
+
+
+</body>
+</html>
