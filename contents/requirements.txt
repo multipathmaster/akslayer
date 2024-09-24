@@ -1,0 +1,6 @@
+httplib2
+pygtail
+flask
+flask_wtf
+wtforms
+psutil
