@@ -1,7 +1,7 @@
 # (AK[S)layer]: Automate and Scale AKS Cluster Upgrades
 An open-source, highly scalable, hands free SaaS tool for upgrading multiple AKS clusters and covering multiple version hops.
 
-![Architecture view for upgrade_kube.png](./upgrade_kube.png)
+![Architecture view for upgrade_kube.png](./img/upgrade_kube.png)
 
 ## AKSlayer0.61b Quickstart Guide :
 1. `git clone https://github.com/multipathmaster/akslayer.git`
@@ -10,7 +10,7 @@ An open-source, highly scalable, hands free SaaS tool for upgrading multiple AKS
 4. Follow the link in the terminal to go to your azure page and register the device. - This should be your admin account!!
 5. Browse to http://localhost:5000
 
-![View for browse.png](./browse.png)
+![View for browse.png](./img/browse.png)
 
 6. Upload your CSV file: an example has been provided below that was a 'save as csv' from google sheets.
 7. Fill out the file_name.json field (a message will appear at the top with your json file name, copy this).  Don't worry, your CSV file has already been converted to json format.
@@ -21,19 +21,19 @@ An open-source, highly scalable, hands free SaaS tool for upgrading multiple AKS
 12. Put in the next hop after this.  This will catch any AKS clusters that are "starting" from this major version.
 13. Put in your desired version you want all clusters to end up at and click 'Submit.'
 
-![View for inputs.png](./inputs.png)
+![View for inputs.png](./img/inputs.png)
 
 14. Watch your chat room and the output while your clusters are upgrading.
 
-![View for upgrading.png](./upgrading.png)
+![View for upgrading.png](./img/upgrading.png)
 
 15. Engage other team members to help you watch the output in the chats, spotting any issues or anomalies.
 
-![View for team.png](./team.png)
+![View for team.png](./img/team.png)
 
 16. Once all of the upgrades have completed, click the stop button at the top of the page.
 
-![View for stop.png](./stop.png)
+![View for stop.png](./img/stop.png)
 
 ### Notes : 
 1. If you are only going up one version: Use the 'Desired Version' and the previous 'Next Hop.'  But continue to fill in the 'Starting Version' and the first 'Next Hop.'  This creates uniformity as well as double checks that your original CSV file doesn't have a mistake in it.  If a cluster in the CSV file is marked '1.27.3' but in actuality it is at '1.26.X,' the upgrader will detect this, adjust the json file and proceed with the upgrade automatically.
@@ -80,4 +80,4 @@ Although it should be of note that the only csv headers that the upgrader actual
 5. Bury the headache of doing a 2-3 day upgrade cycle with 6+ staff to done in just a few hours with 1-2 staff.
 
 ## End of Line
-<img src="./final.png" alt="final.png" style="width:60%;">
+<img src="./img/final.png" alt="final.png" style="width:60%;">
