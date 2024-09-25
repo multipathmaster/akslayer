@@ -15,7 +15,7 @@ An open-source, highly scalable, hands free SaaS tool for upgrading multiple AKS
 6. Upload your CSV file: an example has been provided below that was a 'save as csv' from google sheets.
 7. Fill out the file_name.json field (a message will appear at the top with your json file name, copy this).  Don't worry, your CSV file has already been converted to json format.
 8. Fill in `dev`, `qa`, `uat`, `stage` or `prod`.
-9. Place your chat room's **"webhook_url"** surrounded by double quotes.  Surrounded By **Double Quotes**. **SURROUNDED BY DOUBLE QUOTES**.
+9. Place your chat room's **"webhook_url"** surrounded by double quotes(this can be G-Chat, Slack, or MS Teams).  Surrounded By **Double Quotes**. **SURROUNDED BY DOUBLE QUOTES**.
 10. Put in the lowest version of your AKS fleet (i.e. the lowest version number that one or more clusters share).
 11. Put in the next hop for these lower versions.  This will also catch AKS clusters that are "starting" from this major version (minor version doesn't matter).
 12. Put in the next hop after this.  This will catch any AKS clusters that are "starting" from this major version.
