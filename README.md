@@ -15,7 +15,7 @@ An open-source, highly scalable, hands free SaaS tool for upgrading multiple AKS
 6. Upload your CSV file: an example has been provided below that was a 'save as csv' from google sheets.
 7. Fill out the file_name.json field (a message will appear at the top with your json file name, copy this).  Don't worry, your CSV file has already been converted to json format.
 8. Fill in `dev`, `qa`, `uat`, `stage` or `prod`.
-9. Place your google chat room's **"webhook_url"** surrounded by double quotes.  Surrounded By **Double Quotes**. **SURROUNDED BY DOUBLE QUOTES**.
+9. Place your chat room's **"webhook_url"** surrounded by double quotes.  Surrounded By **Double Quotes**. **SURROUNDED BY DOUBLE QUOTES**.
 10. Put in the lowest version of your AKS fleet (i.e. the lowest version number that one or more clusters share).
 11. Put in the next hop for these lower versions.  This will also catch AKS clusters that are "starting" from this major version (minor version doesn't matter).
 12. Put in the next hop after this.  This will catch any AKS clusters that are "starting" from this major version.
@@ -23,7 +23,7 @@ An open-source, highly scalable, hands free SaaS tool for upgrading multiple AKS
 
 ![View for inputs.png](./inputs.png)
 
-14. Watch your google chat room and the output while your clusters are upgrading.
+14. Watch your chat room and the output while your clusters are upgrading.
 
 ![View for upgrading.png](./upgrading.png)
 
@@ -50,7 +50,7 @@ The backend can handle a lot, but ideally 25 is a good cut off point.
 4. `docker run -it -p 5003:5000 akslayer0.61b` --> fourth batch of 10 (31-40) (fourth tab `localhost:5003`)
 5. `docker run -it -p 5004:5000 akslayer0.61b` --> fifth batch of 10 (41-50) (fifth tab `localhost:5004`)
 6. Follow the link and register each instance using your azure admin account.
-7. Make the decision if these go to different google chat rooms.
+7. Make the decision if these go to different chat rooms.
 8. Create different CSV files that contain 10 clusters per document, name them accordingly (first10.csv, second10.csv, etc...).
 ### Recommendations : 
 1. Keep a nice XL or google sheet of the environment.  It takes no time at all to save it as a CSV file and to use this for the upgrade process.
@@ -75,7 +75,7 @@ Although it should be of note that the only csv headers that the upgrader actual
 ### Ease of Use :
 1. The modular design of AKSlayer allows it to be useful for Engineers, Operations staff, as well as DevOps Engineers.
 2. It is built with flexibility in mind allowing one to run this from the convenience of their laptop/desktop/workstation.
-3. The google chat alerting mechanism means that all Staff members can simultaneously watch the upgrade process together.
+3. The chat alerting mechanism means that all Staff members can simultaneously watch the upgrade process together.
 4. Easier troubleshooting is achieved by marking failed or unsuccessful clusters as such and continuing forward, which means that a Staff member is now freed up to run reconcile or look at the size of the network to make any adjustments while the upgrade process continues with the rest of the clusters.
 5. Bury the headache of doing a 2-3 day upgrade cycle with 6+ staff to done in just a few hours with 1-2 staff.
 
