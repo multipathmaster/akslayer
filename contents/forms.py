@@ -10,6 +10,10 @@ class UpgradeForm(FlaskForm):
     kube_version_mid = StringField("Kube_Version_Mid: ", validators=[DataRequired()])
     kube_version_hi = StringField("Kube_Version_High: ", validators=[DataRequired()])
     kube_version_final = StringField("Kube_Version_Final: ", validators=[DataRequired()])
+    rc_authtoken = StringField("Rc_AuthToken: ")
+    rc_userid = StringField("Rc_UserID: ")
+    rc_alias = StringField("Rc_Alias: ")
+    rc_channel = StringField("Rc_Channel: ")
     submit = SubmitField("Submit")
 
 
