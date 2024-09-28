@@ -40,15 +40,28 @@ def entry_point():
         kube_version_mid = form.kube_version_mid.data
         kube_version_hi = form.kube_version_hi.data
         kube_version_final = form.kube_version_final.data
-        #build our command from our form data
-        upgrade_kube_cmd = "python3 main.py etc/{} {} {} {} {} {} {} &".format(file_json, environment, webhook_url, kube_version_low, kube_version_mid, kube_version_hi, kube_version_final)
-        #sub process for the actual program main.py
-        #subprocess.Popen(upgrade_kube_cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE)
-        #os call because i am tired of full paths and the container is linux based
-        os.system(upgrade_kube_cmd)
-        log.info("Data received. Now redirecting...")
-        flash("Starting upgrade process...")
-        return redirect(url_for('entry_point'))
+        rc_authtoken = form.rc_authtoken.data
+        rc_userid = form.rc_userid.data
+        rc_alias = form.rc_alias.data
+        rc_channel = form.rc_channel.data
+        #if no data in our rc variables
+        if not rc_authtoken and not rc_userid and not rc_alias and not rc_channel:
+            #build our command from our form data
+            upgrade_kube_cmd = "python3 main.py etc/{} {} {} {} {} {} {} &".format(file_json, environment, webhook_url, kube_version_low, kube_version_mid, kube_version_hi, kube_version_final)
+            log.warning(upgrade_kube_cmd)
+            os.system(upgrade_kube_cmd)
+            log.warning("Data received: Now redirecting and starting upgrade process...")
+            flash("Starting upgrade process...")
+            return redirect(url_for('entry_point'))
+        else:
+            #if there is data in our rc variables 
+            #build our command from our form data
+            upgrade_kube_cmd = "python3 main.py etc/{} {} {} {} {} {} {} {} {} {} {} &".format(file_json, environment, webhook_url, kube_version_low, kube_version_mid, kube_version_hi, kube_version_final, rc_authtoken, rc_userid, rc_alias, rc_channel)
+            log.warning(upgrade_kube_cmd)
+            os.system(upgrade_kube_cmd)
+            log.warning("Data received: Now redirecting and starting upgrade process...")
+            flash("Starting upgrade process...")
+            return redirect(url_for('entry_point'))
     else:
         log.info("Standard GET method...")
         return render_template('base.html', form=form)

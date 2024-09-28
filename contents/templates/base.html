@@ -39,7 +39,7 @@ p {
   padding: 5px;
   background: white;
   width: 20%;
-  height: 70%;
+  height: 90%;
   border-radius: 20px;
 }
 #center {
@@ -72,8 +72,8 @@ p {
 
   <div id="left">
     <div class="has-text-centered">
-        <p>MEM Usage: <progress id="memory-bar" value="0" max="100"></progress> <span id="memory">0</span>%</p>
-        <p>CPU Usage: <progress id="cpu-bar" value="0" max="100"></progress> <span id="cpu">0</span>%</p>
+        <p>MEM: <progress id="memory-bar" value="0" max="100"></progress> <span id="memory">0</span>%</p>
+        <p>CPU: <progress id="cpu-bar" value="0" max="100"></progress> <span id="cpu">0</span>%</p>
         <p id="main-status"></p>
     </div>
     <br>
@@ -129,7 +129,7 @@ p {
         <p><label for="environment"></label></p>
         <p><input id="environment" name="environment" required type="text" placeholder="dev/qa/uat/stage/prod"></p>
         <p><label for="webhook_url"></label></p>
-        <p><input id="webhook_url" name="webhook_url" required type="text" placeholder="Slack/Teams/G-Chat Webhook"></p>
+        <p><input id="webhook_url" name="webhook_url" required type="text" placeholder="Slack/Teams/G-Chat/R-Chat"></p>
         <p><label for="kube_version_low"></label></p>
         <p><input id="kube_version_low" name="kube_version_low" required type="text" placeholder="Starting Version - 1.27.3"></p>
         <p><label for="kube_version_mid"></label></p>
@@ -139,9 +139,40 @@ p {
         <p><label for="kube_version_final"></label></p>
         <p><input id="kube_version_final" name="kube_version_final" required type="text" placeholder="Desired Version - 1.30.1"></p>
         <br>
+        <p><input type="button" id="rocket_chat" name="chat_option" value="rocket.chat" class="button is-link is-small" onclick="toggleExtraFields()"></p>
+        <p><label for="rocket_chat"></label></p>
+        <div id="extra_fields" style="display: none;">
+            <p><input id="rc_authtoken" name="rc_authtoken" type="text" placeholder="Rocket.Chat Auth Token"></p>
+            <p><input id="rc_userid" name="rc_userid" type="text" placeholder="Rocket.Chat User ID"></p>
+            <p><input id="rc_alias" name="rc_alias" type="text" placeholder="Rocket.Chat Alias"></p>
+            <p><input id="rc_channel" name="rc_channel" type="text" placeholder="Rocket.Chat Channel"></p>
+        </div>
+        <br>
         <p><label for="submit"></label></p>
         <p><input id="submit" name="submit" button type="submit" value="Submit" class="button is-link is-medium"></p>
     </form>
+
+    <section class="section">
+        <div class="container">
+            <div class="">	
+                <div class="column is-muted notification is-one-quarter">
+                    <h2 class="title"></h2>
+                    <h2 class="subtitle">Activity</h2>
+                    <div id="progress_weblog"></div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="">	
+                <div class="column is-dark notification is-one-quarter">
+                    <div class="is-size-7 has-text-warning" id="display_weblog">
+                        <ul id="display_weblog">
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </section>
 
   </div>
 
@@ -169,11 +200,10 @@ p {
             </div>
         </div>
         </section>
-        
+     
         <script type="text/javascript">
             var source = new EventSource("/log");
             source.onmessage = function(event) {
-                // $('#display').prepend(event.data);
                 $('#display_list').prepend('<li>'+event.data+'</li>');
                 if(event.data == 100){
                     source.close()
@@ -186,6 +216,32 @@ p {
                 $('#progress').value(event.data);
                 if(event.data == 100){
                     source_progress.close()
+                }
+            }
+
+            var source = new EventSource("/weblog");
+            source.onmessage = function(event) {
+                $('#display_weblog').prepend('<li>'+event.data+'</li>');
+                if(event.data == 100){
+                    source.close()
+                }
+            }
+
+            var source_progress = new EventSource("/progress_weblog");
+            source_progress.onmessage = function(event) {
+                $('#progress_weblog').text(event.data+'%');
+                $('#progress_weblog').value(event.data);
+                if(event.data == 100){
+                    source_progress.close()
+                }
+            }
+            
+            function toggleExtraFields() {
+                var extraFields = document.getElementById('extra_fields');
+                if (extraFields.style.display === 'block') {
+                    extraFields.style.display = 'none';
+                } else {
+                    extraFields.style.display = 'block';
                 }
             }
 
@@ -203,8 +259,8 @@ p {
                     }
                 });
             }
-            // Update stats every 4 seconds
-            setInterval(updateStats, 4000);
+            // Update stats every 2 seconds
+            setInterval(updateStats, 2000);
 
         </script>
   </div>

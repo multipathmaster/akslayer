@@ -1,5 +1,4 @@
 FROM mcr.microsoft.com/azure-cli:latest
-#FROM azuresdk/azure-cli-python:latest
 
 ENV KUBERNETES_VERSION=1.27.3
 RUN yum -y install vi
@@ -11,6 +10,7 @@ RUN wget https://storage.googleapis.com/kubernetes-release/release/v${KUBERNETES
 RUN chmod +x /usr/local/bin/kubectl
 WORKDIR /usr/local/bin
 ADD contents /usr/local/bin/
+RUN chmod +x /usr/local/bin/bash_utils/*.sh
 ADD docker-entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 RUN yum -y install python3-pip
