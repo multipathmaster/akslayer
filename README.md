@@ -15,7 +15,7 @@ An open-source, highly scalable, hands free SaaS tool for upgrading multiple AKS
 6. Upload your CSV file: an example has been provided below that was a 'save as csv' from google sheets.
 7. Fill out the file_name.json field (a message will appear at the top with your json file name, copy this).  Don't worry, your CSV file has already been converted to json format.
 8. Fill in `dev`, `qa`, `uat`, `stage` or `prod`.
-9. Place your chat room's **"webhook_url"** surrounded by double quotes(this can be G-Chat, Slack, or MS Teams).  Surrounded By **Double Quotes**. **SURROUNDED BY DOUBLE QUOTES**.
+9. Place your chat room's **"webhook_url"** surrounded by double quotes(this can be Slack, MS Teams, G-Chat, or rocket.chat).  Surrounded By **Double Quotes**. **SURROUNDED BY DOUBLE QUOTES**.
 10. Put in the lowest version of your AKS fleet (i.e. the lowest version number that one or more clusters share).
 11. Put in the next hop for these lower versions.  This will also catch AKS clusters that are "starting" from this major version (minor version doesn't matter).
 12. Put in the next hop after this.  This will catch any AKS clusters that are "starting" from this major version.
@@ -26,6 +26,8 @@ An open-source, highly scalable, hands free SaaS tool for upgrading multiple AKS
 14. Watch your chat room and the output while your clusters are upgrading.
 
 ![View for upgrading.png](./img/upgrading.png)
+
+![View for chatroom.png](./img/chatroom.png)
 
 15. Engage other team members to help you watch the output in the chats, spotting any issues or anomalies.
 
@@ -67,6 +69,10 @@ CLUSTER4,QA,1.24.6,resource_group_bravo,Australia,SUBSCRIPTION-SUB002
 CLUSTER5,UAT,1.27.3,resource_group_alpha,Europe,SUBSCRIPTION-SUB001
 ```
 Although it should be of note that the only csv headers that the upgrader actually require are: `cluster_name,env,version,resource_group,subscription`.  This means that whatever sheet you are using could have more useful fields in it besides the upgrades (an environment sheet, CMDB snippet, etc...).  But pay attention to the headers themselves.  They are **case sensitive**.  Also take note of the **env** header and how the corresponding environments are labeled.  **p**roduction will get skipped and **P**roduction will get upgraded.  **qa** will get skipped and **QA** will get upgraded, etc...
+### Chat Ops :
+1. Built in support for Slack, MS Teams, Google Chat/Spaces, and Rocket.chat.
+2. Rocket.chat will require additional arguments to be included that can be found by clicking on the rocket.chat button.
+3. The Auth Token, User ID, Alias, and Channel (example: "#general" - with the double quotes).
 ### Recent Trials :
 1. AKSlayer has upgraded **192** AKS Clusters in various environments and counting...
 2. 81 at once, utilizing 5 containers, i.e. scaling wide.
@@ -75,7 +81,7 @@ Although it should be of note that the only csv headers that the upgrader actual
 ### Ease of Use :
 1. The modular design of AKSlayer allows it to be useful for Engineers, Operations staff, as well as DevOps Engineers.
 2. It is built with flexibility in mind allowing one to run this from the convenience of their laptop/desktop/workstation.
-3. The chat alerting mechanism means that all Staff members can simultaneously watch the upgrade process together.
+3. The chat ops mechanism means that all Staff members can simultaneously watch the upgrade process together.
 4. Easier troubleshooting is achieved by marking failed or unsuccessful clusters as such and continuing forward, which means that a Staff member is now freed up to run reconcile or look at the size of the network to make any adjustments while the upgrade process continues with the rest of the clusters.
 5. Bury the headache of doing a 2-3 day upgrade cycle with 6+ staff to done in just a few hours with 1-2 staff.
 
